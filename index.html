@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Touchdown AI Video Studio</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">TL</span>
+        <span class="brand-name">Touchdown Labs</span>
+        <span class="brand-product">AI Video Studio</span>
+      </div>
+      <div class="live" aria-live="polite"><span class="live-dot" id="live-dot"></span><span id="system-status">Connecting locally...</span></div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">/01 &nbsp; Prompt to production</div>
+        <h1>Turn one brief into <strong>a production-ready story.</strong></h1>
+        <p class="lede">Plan launch videos, TikToks, ads, microdramas, and short films from one controlled workspace. Change the harness, planning model, or video engine without rebuilding the workflow.</p>
+      </div>
+      <aside class="hero-note">
+        <span class="note-label">Current contract</span>
+        <strong>Start with the $0 proof.</strong>
+        <p>Check the brief, acceptance contract, storyboard, render job, and receipt before paid generation.</p>
+      </aside>
+    </section>
+
+    <section class="pipeline-section" aria-labelledby="pipeline-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">/02</div>
+          <h2 id="pipeline-title">Production path.</h2>
+        </div>
+        <p>Each worker is replaceable. The brief, acceptance contract, approval, and receipt stay fixed.</p>
+      </div>
+      <div class="pipeline" aria-label="Production pipeline">
+        <article class="stage"><div class="stage-label">01 / Agent harness</div><div class="stage-value" id="pipe-harness">Loading</div><div class="stage-meta">Loop, tools, and session state</div></article>
+        <article class="stage"><div class="stage-label">02 / Story model</div><div class="stage-value" id="pipe-control">GLM-5.3 Flash</div><div class="stage-meta">Mapped to a named harness agent</div></article>
+        <article class="stage"><div class="stage-label">03 / Video engine</div><div class="stage-value" id="pipe-video">Fixture / $0</div><div class="stage-meta">Paid pixels require exact-job approval</div></article>
+      </div>
+    </section>
+
+    <div class="section-heading workspace-heading">
+      <div>
+        <div class="eyebrow">/03</div>
+        <h2>Production workspace.</h2>
+      </div>
+      <p>Write the outcome on the left. Inspect the generated plan and accounting receipt on the right.</p>
+    </div>
+
+    <section class="workspace">
+      <article class="panel">
+        <div class="panel-head"><div><div class="panel-kicker">Input</div><div class="panel-title">Creative brief</div></div><div class="panel-step">Required</div></div>
+        <div class="panel-body">
+          <div class="form-grid">
+            <label><span>Format</span>
+              <select id="format">
+                <option value="startup_launch">Startup launch video</option>
+                <option value="tiktok">TikTok video</option>
+                <option value="performance_ad">Performance ad</option>
+                <option value="microdrama">Microdrama episode</option>
+                <option value="short_film">Short film</option>
+              </select>
+            </label>
+            <label><span>Aspect ratio</span>
+              <select id="aspect"><option>9:16</option><option>16:9</option><option>1:1</option></select>
+            </label>
+            <label><span>Agent harness</span>
+              <select id="harness">
+                <option value="trueforge_http">TrueForge</option>
+                <option value="fixture_harness">Fixture / $0 test</option>
+                <option value="prime_agent_acp" disabled>Prime Agent / next adapter</option>
+                <option value="deepseek_harness_acp" disabled>DeepSeek Harness / next adapter</option>
+              </select>
+            </label>
+            <label><span>Planning model</span>
+              <select id="control">
+                <option value="glm_zai_api">GLM-5.3 Flash / Z.ai</option>
+                <option value="codex_subscription">Codex subscription</option>
+                <option value="glm_local_sglang">Self-hosted GLM / SGLang</option>
+                <option value="glm_local_vllm">Self-hosted GLM / vLLM</option>
+              </select>
+            </label>
+            <label><span>Video engine</span>
+              <select id="video-provider">
+                <option value="fake_video">Fixture / $0 contract</option>
+                <option value="higgsfield_cli:seedance_2_0">Higgsfield / Seedance 2.0</option>
+                <option value="higgsfield_cli:minimax_h3">Higgsfield / MiniMax H3</option>
+                <option value="minimax_h3_endpoint:MiniMaxAI/MiniMax-H3">Authorized H3 endpoint</option>
+              </select>
+            </label>
+            <label><span>Clip duration</span>
+              <select id="duration"><option value="5">5 seconds</option><option value="4">4 seconds</option><option value="10">10 seconds</option><option value="15">15 seconds</option></select>
+            </label>
+            <label><span>Product or story</span><input id="product" value="Touchdown AI Video Studio" autocomplete="off"></label>
+            <label><span>Target audience</span><input id="audience" value="startup founders and growth marketers" autocomplete="off"></label>
+            <label class="full"><span>What should happen?</span><textarea id="objective">Launch an AI video studio that turns one plain-English brief into a tight story, shot list, and production-ready video plan. Make the first three seconds impossible to ignore.</textarea></label>
+            <label class="full"><span>Done means</span><textarea id="acceptance">A coherent hook, beginning, turn, payoff, six-shot storyboard, on-screen copy, voiceover, visual direction, and one exact render prompt per shot.</textarea></label>
+          </div>
+          <div class="action-row">
+            <button class="primary" id="build">Build storyboard</button>
+            <button class="secondary" id="render" disabled>Render $0 proof</button>
+          </div>
+          <p class="provider-note" id="provider-note">Loading provider readiness. Prompt text stays in process memory; receipts keep hashes only.</p>
+        </div>
+      </article>
+
+      <article class="panel output">
+        <div class="panel-head"><div><div class="panel-kicker">Output</div><div class="panel-title">Production board</div></div><div class="panel-step state-chip" id="output-state">Waiting</div></div>
+        <div class="output-stage">
+          <div class="empty" id="empty"><div><span class="empty-index">§ 01</span><strong>Your first cut appears here.</strong>Describe the outcome, build the storyboard, then run the $0 render contract.</div></div>
+          <div id="result" hidden><pre class="story" id="story"></pre><div class="events" id="events"></div></div>
+        </div>
+        <div class="receipt">
+          <div><div class="receipt-eyebrow">Evidence receipt</div><div class="receipt-title" id="receipt-title">No render receipt yet</div><div class="receipt-meta" id="receipt-meta">The fixture proves orchestration and accounting, not video pixels or model quality.</div><a id="media-link" href="#" target="_blank" rel="noopener" hidden>Open generated video <span aria-hidden="true">→</span></a></div>
+          <div class="cost"><span class="cost-label">Planned cost</span><span id="cost">$0.00</span></div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="run-boundary">
+      <div class="eyebrow">Run boundary</div>
+      <p>Planning may run automatically. Paid generation remains blocked until a person approves the exact provider, model, budget, prompt hash, and job hash.</p>
+    </footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

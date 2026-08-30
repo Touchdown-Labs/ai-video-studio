@@ -1,0 +1,7 @@
+[pr_reviewer]
+require_tests_review = true
+extra_instructions = """
+Treat the fixture, offline-tested adapters, and live-provider receipts as different claim states.
+Flag any change that bypasses exact-job paid approval, stores credentials or raw model prompts, or weakens the MiniMax H3 jurisdiction gate.
+Require a focused regression test for backend behavior changes.
+"""
