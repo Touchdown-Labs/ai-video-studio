@@ -93,9 +93,12 @@ class HiggsfieldRenderer:
         installed = shutil.which(self.executable) is not None
         if not installed:
             return {"installed": False, "authenticated": False, "reason": "higgsfield CLI not installed"}
-        completed = self.run(
-            [self.executable, "account", "status"], capture_output=True, text=True, timeout=5, check=False
-        )
+        try:
+            completed = self.run(
+                [self.executable, "account", "status"], capture_output=True, text=True, timeout=5, check=False
+            )
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            return {"installed": True, "authenticated": False, "reason": f"Higgsfield status check failed: {exc}"}
         return {
             "installed": True,
             "authenticated": completed.returncode == 0,

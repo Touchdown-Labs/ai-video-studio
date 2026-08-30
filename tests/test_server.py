@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 import sys
 import tempfile
 import threading
@@ -168,6 +169,16 @@ class StudioTests(unittest.TestCase):
             maximum_credits=22.5,
         )
         approval.assert_authorizes(planned)
+
+    def test_higgsfield_status_timeout_does_not_break_studio_status(self) -> None:
+        def timed_out(command: list[str], **kwargs: Any) -> Any:
+            raise subprocess.TimeoutExpired(command, kwargs.get("timeout", 5))
+
+        renderer = renderers.HiggsfieldRenderer(run=timed_out)
+        status = renderer.status()
+        self.assertTrue(status["installed"])
+        self.assertFalse(status["authenticated"])
+        self.assertIn("status check failed", status["reason"])
 
     def test_minimax_h3_endpoint_fails_closed_in_us_without_authorization(self) -> None:
         renderer = renderers.MiniMaxH3EndpointRenderer(
