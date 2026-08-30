@@ -174,7 +174,7 @@ class StudioTests(unittest.TestCase):
         def timed_out(command: list[str], **kwargs: Any) -> Any:
             raise subprocess.TimeoutExpired(command, kwargs.get("timeout", 5))
 
-        renderer = renderers.HiggsfieldRenderer(run=timed_out)
+        renderer = renderers.HiggsfieldRenderer(executable=sys.executable, run=timed_out)
         status = renderer.status()
         self.assertTrue(status["installed"])
         self.assertFalse(status["authenticated"])
